@@ -5,6 +5,25 @@ import { connect } from 'react-redux';
 import { newPost, getPosts, editPost } from '../actions/postActions';
 import { Link } from 'react-router-dom';
 
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const styles = {
+  form:{ 
+    margin: 30
+  },
+  button: {
+    margin:15
+  },
+  error:{
+    color:'red',
+    padding: 30
+  }
+}
+
 class PostForm extends Component {
   constructor(props) {
     super(props);
@@ -40,16 +59,15 @@ class PostForm extends Component {
     this.setState(() => ({ author }));
   };
 
-  onCategoryChange = (e) => {
-    const category = e.target.value;
-    this.setState(() => ({ category }));
+  onCategoryChange = (event, index, value) => {
+    this.setState(() => ({ category: value }));
   };
   
   onSubmit = (e) => {
     e.preventDefault();
     
     if (!this.state.title || !this.state.body || !this.state.author) {
-      this.setState(() => ({ error: 'Please provide all necessary information.' }));
+      this.setState(() => ({ error: 'Please provide all necessary information!' }));
     } else {
       this.setState(() => ({ error: '' }));
       const newPost = {
@@ -74,42 +92,43 @@ class PostForm extends Component {
   };
   render() {
     return (
-      <div>
-        {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.onSubmit}>
-          <input
-            type="text"
-            placeholder="Post title"
-            autoFocus
+      <Paper zDepth={3}>
+        {this.state.error && <p style={styles.error}>{this.state.error}</p>}
+        <form style={styles.form} onSubmit={this.onSubmit}>
+          <TextField
+            floatingLabelText="Post Title"
+            hintText="Title"
             value={this.state.title}
+            fullWidth={true}
             onChange={this.onTitleChange}
           />
-          <textarea
-            placeholder="Add a body for your post"
-            value={this.state.body}
-            onChange={this.onBodyChange}
-          >
-          </textarea>
-          <input
-            type="text"
-            placeholder="Post author"
-            autoFocus
+          <TextField
+            floatingLabelText="Post Author"
             value={this.state.author}
             onChange={this.onAuthorChange}
+            hintText="Author"
+            fullWidth={true}
           />
-          <select value={this.state.category} onChange={this.onCategoryChange}>
-            {
-              this.props.categories.map(category =>(category.name !== "all" && <option key={category.path} value={category.name}>{category.name}</option>))
-            }
-          </select>
-          <button>
-            {this.state.edit ? 'Save' : 'Add post'}
-          </button>
-          <button>
-            <Link to={this.state.edit ? `/post/${this.state.id}` : '/'}>Cancel</Link>
-          </button>
+          <TextField
+            floatingLabelText="Post Body"
+            value={this.state.body}
+            onChange={this.onBodyChange}
+            hintText="Body"
+            fullWidth={true}
+            multiLine
+          />
+          <SelectField
+            fullWidth
+            floatingLabelText="Category"
+            value={this.state.category}
+            onChange={this.onCategoryChange}
+          >
+            { this.props.categories.map(category =>(category.name !== "all" && <MenuItem key={category.path} value={category.path} primaryText={category.name} />)) }
+          </SelectField>
+          <RaisedButton type="submit" style={styles.button} label= {this.state.edit ? 'Save' : 'Add post'} primary />
+          <Link to={this.state.edit ? `/post/${this.state.id}` : '/'}><RaisedButton style={styles.button} label='Cancel' secondary /></Link>
         </form>
-      </div>
+      </Paper>
     )
   }
 }

@@ -5,6 +5,16 @@ import { connect } from 'react-redux';
 import { newComment, editComment } from '../actions/commentActions';
 import { updateCommentCounter } from '../actions/postActions';
 
+import TextField from 'material-ui/TextField';
+import FlatButton from 'material-ui/FlatButton';
+
+const styles = {
+  error:{
+    color:'red',
+    padding: 30
+  }
+}
+
 class CommentForm extends Component {
   constructor(props) {
     super(props);
@@ -51,7 +61,7 @@ class CommentForm extends Component {
     e.preventDefault();
 
     if (!this.state.body ||!this.state.author) {
-      this.setState(() => ({ error: 'Please provide all necessary information.' }));
+      this.setState(() => ({ error: 'Please provide all necessary information!' }));
     } else {
       this.setState(() => ({ error: '', body: '', author: '' }));
       const comment = {
@@ -69,31 +79,28 @@ class CommentForm extends Component {
   render() {
     return (
       <div>
-        {this.state.error && <p>{this.state.error}</p>}
+        {this.state.error && <p style={styles.error}>{this.state.error}</p>}
         <form onSubmit={this.onSubmit}>
-          <textarea
-            placeholder="Add comment."
+          <TextField
+            multiLine
+            floatingLabelText="Your comment"
+            hintText="Add comment"
             value={this.state.body}
+            // fullWidth={true}
             onChange={this.onBodyChange}
-          >
-          </textarea>
-          <input
-            type="text"
-            placeholder="Post author"
-            autoFocus
+          />
+          <br/>
+          <TextField
+            floatingLabelText="Comment author"
+            hintText="Your name"
             value={this.state.author}
+            // fullWidth={true}
             onChange={this.onAuthorChange}
           />
-          <button>
-            {this.state.edit ? 'Update' : 'Add comment'}
-          </button>
+          <br/>
+          <FlatButton type="submit" label= {this.state.edit ? 'Update' : 'Add comment'} primary />
+          { this.state.edit && <FlatButton label='Cancel' onClick={e=>this.onCancel()} secondary /> }
         </form>
-        {
-          this.state.edit && 
-            <button onClick={e=>this.onCancel()}>
-              Cancel
-            </button>
-        }
       </div>
     )
   }

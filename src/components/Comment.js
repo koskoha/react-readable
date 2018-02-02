@@ -5,6 +5,27 @@ import { postVote, updateCommentCounter } from '../actions/postActions';
 import { bindActionCreators } from 'redux';
 import CommentForm from './CommentForm';
 
+import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
+import Divider from 'material-ui/Divider';
+
+import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
+import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
+import Timestamp from 'material-ui/svg-icons/action/schedule';
+import Author from 'material-ui/svg-icons/social/person';
+import CommentIcon from 'material-ui/svg-icons/communication/forum';
+
+const styles = {
+  comment:{
+    padding: 20,
+    marginTop: 5,
+  },
+  blocks:{
+    width:400,
+    display: 'inline-block',
+  }
+
+}
 
 class Comment extends Component {
   constructor(props) {
@@ -45,25 +66,31 @@ class Comment extends Component {
   render() {
     const comment = this.props.comment;
     return (
-      <div className="App">
+      <div>
         {
-          this.state.editComment ? <CommentForm onSaveClick={this.onSaveClick} onCancelClick={this.onCancelEditComment} comment={comment} /> :
-          !comment.deleted &&
-          <div key={comment.id} className="App">
-            <hr/>
-            <p>{new Date(comment.timestamp).toDateString()}</p>
-            <p> {comment.title}</p>
-            <p>{comment.body}</p>
-            <p>{comment.author}</p>
-            <p>
-              <button onClick={e => {this.onVoteClick(e,"upVote",comment.id)}}> + </button>
-              {comment.voteScore} 
-              <button onClick={e => {this.onVoteClick(e,"downVote", comment.id)}}> - </button>
-            </p>
-            <button onClick={e=>this.onDeleteClick(comment)}>Delete</button>
-            <button onClick={e=> this.onEditComment()}>Edit</button>
-            <hr/>
-          </div>
+          this.state.editComment ? <Paper style={styles.comment} zDepth={1} key={comment.id}><CommentForm onSaveClick={this.onSaveClick} onCancelClick={this.onCancelEditComment} comment={comment} /> </Paper> : !comment.deleted &&
+          <Paper style={styles.comment} zDepth={1} key={comment.id}>
+            <p><Timestamp />     {new Date(comment.timestamp).toDateString()}</p>
+            <Divider/>
+            <div style={styles.blocks}>
+              <p><CommentIcon />   {comment.body}</p>
+              <p><Author />   {comment.author}</p>
+            </div>
+              <div style={styles.blocks}>
+              <FlatButton 
+                icon={<ThumbUp />}
+                onClick={e => {this.onVoteClick(e,"upVote",comment.id)}} 
+              /> 
+              {comment.voteScore}
+              <FlatButton 
+                icon={<ThumbDown />}
+                onClick={e => {this.onVoteClick(e,"downVote",comment.id)}}
+              /> 
+            </div>
+            <Divider/>
+            <FlatButton label='Delete' onClick={e=>this.onDeleteClick(comment)} secondary />
+            <FlatButton label='Edit' onClick={e=>this.onEditComment()} primary />
+          </Paper>
         }
       </div>
     );
