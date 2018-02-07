@@ -13,11 +13,10 @@ class AppContainer extends Component{
       <div>
         <Categories />
         <PostsSorter />
-        <Route path='/:category' component={PostsList}/>
-        
-      </div>
-    )
+        <PostsList category={this.props.match.params.category}/>
+        </div>
+      )
+    }
   }
-}
-
-export default AppContainer;
+  
+  export default AppContainer;

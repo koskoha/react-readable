@@ -24,9 +24,10 @@ export function getPostsSuccess(posts){
 }
 
 export function getPostsByCategory(category){
+  console.log("Action ", category);
   return (dispatch, getState) => {
     return api.getPostsByCategory(category).then(res => {
-      dispatch(getPostsSuccess(res))
+      dispatch(getPostsByCategorySuccess(res))
     })
   }
 }

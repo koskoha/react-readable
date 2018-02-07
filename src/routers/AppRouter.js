@@ -12,8 +12,8 @@ const AppRouter = () => (
     <BrowserRouter>
       <div>
         <Switch>
-          <Route exact path="/" render={() => (<Redirect to='/all' />) }  />
-          <Route exact path="/all"  component={AppContainer}/>
+          <Route exact path="/" render={() => (<Redirect to='/all' />)} />
+          <Route exact path="/:category" component={AppContainer} />
           <Route path="/create" component={PostForm} exact/>
           <Route path="/edit/:id" component={PostForm} exact/>
           <Route exact path="/*/:id" component={Post}/>

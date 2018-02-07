@@ -10,7 +10,6 @@ class App extends Component {
 
   componentDidMount(){
     this.props.store.dispatch(categoriesActions.getCategories());
-    this.props.store.dispatch(postActions.getPosts());
   }
 
   render(){

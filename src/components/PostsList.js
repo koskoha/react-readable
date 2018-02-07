@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import sortPosts from '../sorters/posts';
 import { bindActionCreators } from 'redux';
 import * as postActions from '../actions/postActions';
+import history from '../routers/history'
 
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -17,13 +18,15 @@ const styles = {
 
 class PostsList extends Component{
 
-  componentDidMount(){
-      const category = this.props.category;
-      console.log('category from postList', category);
-      if(category === 'all'){
-        return this.props.postActions.getPosts();
+  componentWillReceiveProps(nextProps){
+    if(this.props.category !== nextProps.category){
+        const category = nextProps.category;
+        if(nextProps.category === 'all'){
+          this.props.postActions.getPosts();
+        }else if(nextProps.category){
+          this.props.postActions.getPostsByCategory(nextProps.category);
+        }
       }
-      this.props.postActions.getPostsByCategory(category);
   }
 
   render(){
@@ -56,9 +59,8 @@ class PostsList extends Component{
 }
 
 const mapStateToProps = (state, props) => {
-  console.log("CAtegory from mapState", props.match.params.category);
   return{
-    category:props.match.params.category,
+    categoriesList: state.categories,
     posts: sortPosts(state.posts, state.sorter)
   };
 };
