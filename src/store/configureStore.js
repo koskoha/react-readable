@@ -1,4 +1,9 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux';
+import { autoRehydrate, persistStore } from 'redux-persist';
+// import { localStorage } from 'redux-persist/storages';
+// import { asyncLocalStorage } from 'redux-persist/storages';
+import localForage from 'localforage'
+
 
 //Redux Thunk need to be added as a middleware
 
@@ -15,21 +20,35 @@ import rootReducer from '../reducers/index'
 const loggerMiddleware = createLogger()
 
 
-// Configuring the Store. PreloadState is the initial State.
-export function configureStore(preloadedState) {
+// Configuring the Store.
+export function configureStore() {
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-  return createStore(
-    rootReducer,
-    preloadedState,
-
-    //Apply the middleware usign the Redux's provided applymiddleware function
-    composeEnhancers(    
-      applyMiddleware(
-        thunkMiddleware,
-        loggerMiddleware
-      )
-    )
-  )
+  return new Promise ((resolve, reject) => {
+    try{
+      const store = createStore(
+        rootReducer,
+    
+        //Apply the middleware usign the Redux's provided applymiddleware function
+        composeEnhancers(    
+          autoRehydrate(),
+          applyMiddleware(
+            thunkMiddleware,
+            loggerMiddleware
+          )
+        )
+      );
+      persistStore(
+        store,
+        { 
+          storage: localForage,
+          blacklist: ['categories']
+        },
+        () => resolve(store)
+      );
+    } catch ( e ) {
+      reject (e);
+    }
+  });
 }

@@ -106,7 +106,8 @@ class Post extends Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    post: state.posts.find((post) => post.id === props.match.params.id),
+    // post: state.posts.find((post) => { post.id === props.match.params.id}),
+    post: look(state.posts, props.match.params.id),
     comments: state.comments
   };
 };
@@ -117,6 +118,10 @@ function mapDispatchToProps(dispatch){
     voteActions: bindActionCreators(postVote, dispatch),
     deletePost: bindActionCreators(deletePost, dispatch)
   }
+}
+
+const look = (posts, paramId) => {
+  return posts.find( post => post.id === paramId);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

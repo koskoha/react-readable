@@ -3,16 +3,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as postActions from '../actions/postActions';
 import uniqid from 'uniqid';
+import history from '../routers/history';
 
 import {Tabs, Tab} from 'material-ui/Tabs';
+import { Link, withRouter, Redirect } from 'react-router-dom';
 
 class Categories extends Component {
 
   getPostsByCategory(category){
-    if(category.path === 'all'){
-      this.props.postActions.getPosts();
-    }
-    this.props.postActions.getPostsByCategory(category.path);
+    history.push(category.path);
   }
 
   render() {
@@ -20,7 +19,7 @@ class Categories extends Component {
       <div>
       <Tabs>
         {this.props.categories.map(category =>
-          <Tab key={uniqid()} label={category.name} onActive={ () => { this.getPostsByCategory(category)}} />)
+          <Tab key={uniqid()} label={category.name} onActive={ () => { this.getPostsByCategory(category)}}> </Tab>)
         }
       </Tabs>
       </div>
@@ -39,5 +38,6 @@ function mapDispatchToProps(dispatch){
     postActions: bindActionCreators(postActions, dispatch)
   }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

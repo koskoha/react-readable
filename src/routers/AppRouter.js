@@ -4,16 +4,19 @@ import AppContainer from '../components/AppContainer';
 import NotFoundPage from '../components/NotFoundPage';
 import Post from '../components/Post';
 import PostForm from '../components/PostForm';
+import { Redirect } from 'react-router';
+import PostsList from '../components/PostsList';
 
 const AppRouter = () => (
-  <div className='container'>
+  <div>
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path="/" component={AppContainer} exact />
+          <Route exact path="/" render={() => (<Redirect to='/all' />) }  />
+          <Route exact path="/all"  component={AppContainer}/>
           <Route path="/create" component={PostForm} exact/>
-          <Route path="/edit/:id" component={PostForm}/>
-          <Route path="/post/:id" component={Post}/>
+          <Route path="/edit/:id" component={PostForm} exact/>
+          <Route exact path="/*/:id" component={Post}/>
           <Route component={NotFoundPage} />
         </Switch>
       </div>

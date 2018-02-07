@@ -126,7 +126,7 @@ class PostForm extends Component {
             { this.props.categories.map(category =>(category.name !== "all" && <MenuItem key={category.path} value={category.path} primaryText={category.name} />)) }
           </SelectField>
           <RaisedButton type="submit" style={styles.button} label= {this.state.edit ? 'Save' : 'Add post'} primary />
-          <Link to={this.state.edit ? `/post/${this.state.id}` : '/'}><RaisedButton style={styles.button} label='Cancel' secondary /></Link>
+          <Link to={this.state.edit ? `/${this.props.post.category}/${this.state.id}` : '/'}><RaisedButton style={styles.button} label='Cancel' secondary /></Link>
         </form>
       </Paper>
     )
