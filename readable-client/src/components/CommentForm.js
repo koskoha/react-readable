@@ -7,13 +7,7 @@ import { updateCommentCounter } from '../actions/postActions';
 
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-
-const styles = {
-  error:{
-    color:'red',
-    padding: 30
-  }
-}
+import styles from '../styles/commentForm'
 
 class CommentForm extends Component {
   constructor(props) {

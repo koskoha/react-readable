@@ -10,19 +10,7 @@ import TextField from 'material-ui/TextField';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-
-const styles = {
-  form:{ 
-    margin: 30
-  },
-  button: {
-    margin:15
-  },
-  error:{
-    color:'red',
-    padding: 30
-  }
-}
+import styles from '../styles/postForm'
 
 class PostForm extends Component {
   constructor(props) {

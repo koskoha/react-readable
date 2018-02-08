@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import * as postActions from '../actions/postActions';
 import history from '../routers/history'
-import { postVote, deletePost } from '../actions/postActions';
+import * as actions from '../actions/postActions';
 
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
@@ -16,35 +16,13 @@ import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import FavoriteIcon from 'material-ui/svg-icons/action/favorite';
 import CommentIcon from 'material-ui/svg-icons/action/question-answer';
 import Divider from 'material-ui/Divider';
+import styles from '../styles/postInfoList'
 
-const styles = {
-  card: {
-    margin: 20
-  },
-  post:{
-    textAlign:'center',
-    backgroundColor:'#FAFAFA'
-  },
-  button:{
-    margin: 5
-  },
-  icons:{
-    marginLeft:5,
-    marginRight:5,
-  },
-  title:{
-    color:'#039BE5', 
-    fontSize:20
-  },
-  divider:{
-    marginLeft:70, marginRight:70
-  }
-}
 
 class PostInfoList extends Component{
 
   onVoteClick(e, option){
-    this.props.voteActions('posts',this.props.post.id, { option })
+    this.props.postVote('posts',this.props.post.id, { option })
   }
 
   onDeleteClick (){
@@ -94,11 +72,4 @@ class PostInfoList extends Component{
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    voteActions: bindActionCreators(postVote, dispatch),
-    deletePost: bindActionCreators(deletePost, dispatch)
-  }
-}
-
-export default connect(null, mapDispatchToProps)(PostInfoList);
+export default connect(null, actions)(PostInfoList);

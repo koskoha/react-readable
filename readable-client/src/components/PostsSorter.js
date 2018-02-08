@@ -4,12 +4,7 @@ import { sortByScore, sortByDate } from '../actions/sortersActions';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-
-const styles = {
-  select:{
-    marginLeft: 20,
-  }
-}
+import styles from '../styles/postSorter'
 
 class PostsSorter extends Component{
 

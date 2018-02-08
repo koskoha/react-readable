@@ -14,18 +14,7 @@ import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import Timestamp from 'material-ui/svg-icons/action/schedule';
 import Author from 'material-ui/svg-icons/social/person';
 import CommentIcon from 'material-ui/svg-icons/communication/forum';
-
-const styles = {
-  comment:{
-    padding: 20,
-    marginTop: 5,
-  },
-  blocks:{
-    width:400,
-    display: 'inline-block',
-  }
-
-}
+import styles from '../styles/comment'
 
 class Comment extends Component {
   constructor(props) {

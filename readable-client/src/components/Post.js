@@ -13,36 +13,13 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
-
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import Home from 'material-ui/svg-icons/action/home';
 import Schedule from 'material-ui/svg-icons/action/schedule';
 import Author from 'material-ui/svg-icons/social/person';
 import { Redirect } from 'react-router';
-
-const styles = {
-  post:{
-    textAlign:'center',
-    padding: 20,
-    marginTop: 5,
-  },
-  button:{
-    margin: 5
-  },
-  commentForm:{
-    marginTop:30,
-    marginLeft: 50,
-    padding:15,
-    width:300,
-  },
-  commentCounter:{
-    color: 'darkturquoise'
-  },
-  divider:{
-    marginLeft:70, marginRight:70
-  }
-}
+import styles from '../styles/post'
 
 class Post extends Component {
   

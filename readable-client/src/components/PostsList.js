@@ -10,12 +10,7 @@ import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import PostInfoList from './PostInfoList';
-
-const styles = {
-  card: {
-    margin: 20
-  }
-}
+import styles from '../styles/postsList'
 
 class PostsList extends Component{
 
