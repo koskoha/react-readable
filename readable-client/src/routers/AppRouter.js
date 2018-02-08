@@ -6,15 +6,13 @@ import Post from '../components/Post';
 import PostForm from '../components/PostForm';
 import { Redirect } from 'react-router';
 import PostsList from '../components/PostsList';
-// <Route path="*" render={() => (<Redirect to='/404' />)} />
-// <Route path="/404" component={NotFoundPage} />
 
 const AppRouter = () => (
   <div>
     <BrowserRouter>
       <div>
         <Switch>
-          <Route exact path="/" render={() => (<Redirect to='/all' />)} />
+          <Route exact path="/" component={AppContainer} />)} />
           <Route exact path="/create" component={PostForm} />
           <Route exact path="/edit/:id" component={PostForm} />
           <Route exact path="/:category/:id" component={Post}/>
