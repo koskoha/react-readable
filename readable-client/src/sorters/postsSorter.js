@@ -1,5 +1,6 @@
 
-export default (posts, { sortBy }) => [...posts].sort((a, b) => {
+export default (posts, { sortBy }) => 
+[...posts].sort((a, b) => {
     if (sortBy === 'date') {
       return getUnixTime(a.timestamp) < getUnixTime(b.timestamp) ? 1 : -1;
     }else if (sortBy === 'score') {

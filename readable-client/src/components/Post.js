@@ -38,6 +38,9 @@ const styles = {
   },
   commentCounter:{
     color: 'darkturquoise'
+  },
+  divider:{
+    marginLeft:70, marginRight:70
   }
 }
 
@@ -77,7 +80,7 @@ class Post extends Component {
         <Paper zDepth={2} style={styles.post}>
           <p><Schedule />  {new Date(post.timestamp).toDateString()}</p>
           <h2> {post.title}</h2>
-          <Divider />
+          <Divider style={styles.divider} />
           <h5>{post.body}</h5>
           <p><Author />    {post.author}</p>
           <p>

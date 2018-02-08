@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
-import sortPosts from '../sorters/posts';
+import sortPosts from '../sorters/postsSorter';
 import { bindActionCreators } from 'redux';
 import * as postActions from '../actions/postActions';
 import history from '../routers/history'
@@ -9,6 +9,7 @@ import history from '../routers/history'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import PostInfoList from './PostInfoList';
 
 const styles = {
   card: {
@@ -30,26 +31,11 @@ class PostsList extends Component{
   }
 
   render(){
+    console.log("PostList", this.props.posts);
     return (
       <div>
       {this.props.posts.map(post =>(
-          !post.deleted && <div key={post.id}>
-            <Card style={styles.card}>
-              <CardHeader
-                title={post.title}
-                subtitle={post.author}
-                actAsExpander={true}
-                showExpandableButton={true}
-              />
-              <CardActions>
-                <Link to={`${post.category}/${post.id}`}><FlatButton label='Read more...' primary /></Link>
-              </CardActions>
-              <CardText expandable={true}>
-                {post.body}
-              </CardText>
-            </Card>
-           
-          </div>)
+          !post.deleted && <PostInfoList key={post.id} post={post} />)
           )
         }
         <Link to='/create'><RaisedButton  label="Add Post" fullWidth={true} primary/></Link>

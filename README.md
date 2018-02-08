@@ -1,42 +1,58 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-Below you will find some information on how to perform common tasks.<br>
-You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+## Prerequisites
 
-## Available Scripts
+To run this project, you will need to install Node.js.
 
-In the project directory, you can run:
+## Run project
 
-### `npm start`
+Download or clone this repository.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Go to project folder using:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```
+> cd readable
+```
 
-### `npm test`
+## Install and run server
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
+Go to readable-server folder and run
 
-### `npm run build`
+```
+> npm install
+```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After all dependencies installed run:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```
+> node server.js
+```
 
-See the section about [deployment](#deployment) for more information.
+## Install and run client project
 
-### `npm run eject`
+Go to readable-client folder and run
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+> npm install
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+After all dependencies installed run:
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+> npm start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Libraries used
+
+The project uses the following dependencies:
+
+* React
+* Redux
+* Redux Thunk
+* React Router V4
+* Material-UI
+
+
+## Author
+
+Full-stuck developer: CONSTANTINE KOBYLINSKYI
 
