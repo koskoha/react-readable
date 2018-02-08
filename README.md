@@ -10,7 +10,7 @@ Download or clone this repository.
 Go to project folder using:
 
 ```
-> cd readable
+> cd react-readable
 ```
 
 ## Install and run server
