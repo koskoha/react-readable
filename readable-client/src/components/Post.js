@@ -7,6 +7,7 @@ import { postVote, deletePost } from '../actions/postActions';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
 import uniqid from 'uniqid';
+import NotFoundPage from './NotFoundPage'
 
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -18,6 +19,7 @@ import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import Home from 'material-ui/svg-icons/action/home';
 import Schedule from 'material-ui/svg-icons/action/schedule';
 import Author from 'material-ui/svg-icons/social/person';
+import { Redirect } from 'react-router';
 
 const styles = {
   post:{
@@ -42,9 +44,12 @@ const styles = {
 class Post extends Component {
   
   componentDidMount(){
-    this.props.getComments(this.props.post.id);
+    if(this.props.post){
+      this.props.getComments(this.props.post.id);
+
+    }
   }
-  
+
   onVoteClick(e, option){
     this.props.voteActions('posts',this.props.post.id, { option })
   }
@@ -56,6 +61,9 @@ class Post extends Component {
   
   render(){
     const post = this.props.post;
+    if(!post || post.deleted){
+      return (<NotFoundPage />)
+    }
     return (
       <div>
         <Link to='/'>
